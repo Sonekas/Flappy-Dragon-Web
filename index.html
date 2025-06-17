@@ -229,6 +229,18 @@
             }
         });
 
+        // Prevenir comportamento padrão de toque
+        canvas.addEventListener("touchstart", e => {
+            e.preventDefault();
+            if (gameOver) {
+                resetGame();
+            } else {
+                dragon.velocity = jumpForce;
+                gameStarted = true;
+            }
+        }, { passive: false });
+
+        // Manter o mousedown para desktop
         canvas.addEventListener("mousedown", e => {
             if (gameOver) {
                 resetGame();
